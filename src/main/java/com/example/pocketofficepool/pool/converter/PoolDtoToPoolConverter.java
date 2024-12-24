@@ -2,20 +2,18 @@ package com.example.pocketofficepool.pool.converter;
 
 import com.example.pocketofficepool.pool.Pool;
 import com.example.pocketofficepool.pool.dto.PoolDto;
-import com.example.pocketofficepool.pooltype.PoolType;
-import com.example.pocketofficepool.pooltype.PoolTypeService;
-import com.example.pocketofficepool.user.User;
-import com.example.pocketofficepool.user.UserService;
+import com.example.pocketofficepool.gametype.GameType;
+import com.example.pocketofficepool.gametype.GameTypeService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PoolDtoToPoolConverter implements Converter<PoolDto, Pool> {
 
-    private final PoolTypeService poolTypeService;
+    private final GameTypeService gameTypeService;
 
-    public PoolDtoToPoolConverter(PoolTypeService poolTypeService) {
-        this.poolTypeService = poolTypeService;
+    public PoolDtoToPoolConverter(GameTypeService gameTypeService) {
+        this.gameTypeService = gameTypeService;
     }
 
     @Override
@@ -25,8 +23,8 @@ public class PoolDtoToPoolConverter implements Converter<PoolDto, Pool> {
         pool.setBettingType(source.bettingType());
         pool.setOpenTime(source.openTime());
         pool.setCloseTime(source.closeTime());
-        PoolType poolType = poolTypeService.findPoolTypeById(source.poolType());
-        pool.setPoolType(poolType);
+        GameType gameType = gameTypeService.findById(source.poolType());
+        pool.setPoolType(gameType);
         return pool;
     }
 }

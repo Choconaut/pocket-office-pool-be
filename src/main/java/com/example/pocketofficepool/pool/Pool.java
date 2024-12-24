@@ -3,10 +3,9 @@ package com.example.pocketofficepool.pool;
 import com.example.pocketofficepool.BaseEntity;
 import com.example.pocketofficepool.BettingType;
 import com.example.pocketofficepool.Status;
-import com.example.pocketofficepool.game.Game;
 import com.example.pocketofficepool.gamegroup.GameGroup;
 import com.example.pocketofficepool.pick.Pick;
-import com.example.pocketofficepool.pooltype.PoolType;
+import com.example.pocketofficepool.gametype.GameType;
 import com.example.pocketofficepool.user.User;
 import jakarta.persistence.*;
 
@@ -28,9 +27,6 @@ public class Pool extends BaseEntity {
     private List<Pick> picks;
 
     @OneToMany(mappedBy = "pool", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Game> games; // Games in this pool
-
-    @OneToMany(mappedBy = "pool", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<GameGroup> gameGroups; // Groups of games in this pool
 
     private ZonedDateTime openTime; // When picks can be made
@@ -40,7 +36,7 @@ public class Pool extends BaseEntity {
     private Status status;
 
     @ManyToOne
-    private PoolType poolType;
+    private GameType gameType;
 
     public ZonedDateTime getOpenTime() {
         return openTime;
@@ -66,12 +62,12 @@ public class Pool extends BaseEntity {
         this.status = status;
     }
 
-    public PoolType getPoolType() {
-        return poolType;
+    public GameType getPoolType() {
+        return gameType;
     }
 
-    public void setPoolType(PoolType poolType) {
-        this.poolType = poolType;
+    public void setPoolType(GameType gameType) {
+        this.gameType = gameType;
     }
 
     public String getName() {
@@ -106,27 +102,11 @@ public class Pool extends BaseEntity {
         this.picks = picks;
     }
 
-    public List<Game> getGames() {
-        return games;
-    }
-
-    public void setGames(List<Game> games) {
-        this.games = games;
-    }
-
     public List<GameGroup> getGameGroups() {
         return gameGroups;
     }
 
     public void setGameGroups(List<GameGroup> gameGroups) {
         this.gameGroups = gameGroups;
-    }
-
-    public void addGame(Game game) {
-        this.games.add(game);
-    }
-
-    public void addGameGroup(GameGroup gameGroup) {
-        this.gameGroups.add(gameGroup);
     }
 }

@@ -1,28 +1,30 @@
 package com.example.pocketofficepool.pool;
 
-import com.example.pocketofficepool.pooltype.PoolType;
-import com.example.pocketofficepool.pooltype.PoolTypeRepository;
+import com.example.pocketofficepool.gametype.GameType;
+import com.example.pocketofficepool.gametype.GameTypeRepository;
 import com.example.pocketofficepool.system.exception.ObjectNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class PoolService {
 
     private final PoolRepository poolRepository;
-    private final PoolTypeRepository poolTypeRepository;
+    private final GameTypeRepository gameTypeRepository;
 
-    public PoolService(PoolRepository poolRepository, PoolTypeRepository poolTypeRepository) {
+    public PoolService(PoolRepository poolRepository, GameTypeRepository gameTypeRepository) {
         this.poolRepository = poolRepository;
-        this.poolTypeRepository = poolTypeRepository;
+        this.gameTypeRepository = gameTypeRepository;
     }
 
     public Pool save(Pool pool) {
-        PoolType poolType = this.poolTypeRepository.findById(pool.getPoolType().getId())
+        GameType gameType = this.gameTypeRepository.findById(pool.getPoolType().getId())
                 .orElseThrow(() -> new ObjectNotFoundException("pool type", pool.getPoolType().getId()));
-        pool.setPoolType(poolType);
+        pool.setPoolType(gameType);
         return this.poolRepository.save(pool);
     }
 
@@ -43,17 +45,10 @@ public class PoolService {
         return this.save(pool);
     }
 
-    public Pool delete(UUID poolId) {
+    public void delete(UUID poolId) {
         Pool pool = this.findById(poolId);
 
         pool.setDeletedAt(ZonedDateTime.now());
-        return this.poolRepository.save(pool);
-    }
-
-    public Pool createPool(Pool pool) {
-        // TODO: Get authenticated user and set owner to authenticated user if
-        // authenticated user is an admin/owner
-
-        return this.save(pool);
+        this.poolRepository.save(pool);
     }
 }

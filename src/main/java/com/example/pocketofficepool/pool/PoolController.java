@@ -29,20 +29,32 @@ public class PoolController {
     @PostMapping()
     public Result createPool(@RequestBody @Valid PoolDto poolDto) {
         Pool pool = this.poolDtoToPoolConverter.convert(poolDto);
-        Pool savedPool = this.poolService.createPool(pool);
+        assert pool != null;
+        Pool savedPool = this.poolService.save(pool);
         PoolDto savedPoolDto = this.poolToPoolDtoConverter.convert(savedPool);
         return new Result(true, StatusCode.SUCCESS,"Successfully created pool", savedPoolDto);
     }
 
+    // Don't think there's a reason for pools to have unique names so it searches by id
+    @PostMapping("/{poolId}")
+    public Result getPool(@PathVariable UUID poolId) {
+        Pool pool = this.poolService.findById(poolId);
+        PoolDto poolDto = this.poolToPoolDtoConverter.convert(pool);
+        return new Result(true, StatusCode.SUCCESS, "Successfully retrieved pool", poolDto);
+    }
+
     @PutMapping("/{poolId}")
-    public Pool updatePool(UUID poolId, Pool update) {
-        return this.poolService.update(poolId, update);
+    public Result updatePool(@PathVariable UUID poolId, @RequestBody PoolDto update) {
+        Pool pool = this.poolDtoToPoolConverter.convert(update);
+        assert pool != null;
+        Pool updatedPool = this.poolService.update(poolId, pool);
+        PoolDto updatedPoolDto = this.poolToPoolDtoConverter.convert(updatedPool);
+        return new Result(true, StatusCode.SUCCESS, "Successfully updated pool", updatedPoolDto);
     }
 
-    @PutMapping("/{poolId}/delete")
-    public Pool deletePool(UUID poolId) {
-        return this.poolService.delete(poolId);
+    @PutMapping("/{poolId}")
+    public Result deletePool(@PathVariable UUID poolId) {
+        this.poolService.delete(poolId);
+        return new Result(true, StatusCode.SUCCESS, "Successfully deleted pool");
     }
-
-
 }

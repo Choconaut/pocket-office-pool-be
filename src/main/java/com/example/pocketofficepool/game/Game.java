@@ -2,11 +2,9 @@ package com.example.pocketofficepool.game;
 
 import com.example.pocketofficepool.BaseEntity;
 import com.example.pocketofficepool.gamegroup.GameGroup;
-import com.example.pocketofficepool.pool.Pool;
-import com.example.pocketofficepool.pooltype.PoolType;
+import com.example.pocketofficepool.gametype.GameType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 import java.time.ZonedDateTime;
 
@@ -17,7 +15,8 @@ public class Game extends BaseEntity {
 
     private String team2;
 
-    private float spread;
+// Used for spread betting
+//    private float spread;
 
     private ZonedDateTime startTime;
 
@@ -29,10 +28,7 @@ public class Game extends BaseEntity {
     private GameGroup gameGroup;
 
     @ManyToOne
-    private PoolType poolType;
-
-    @ManyToOne
-    private Pool pool; // Pool this game belongs to
+    private GameType gameType;
 
     public String getTeam1() {
         return team1;
@@ -48,14 +44,6 @@ public class Game extends BaseEntity {
 
     public void setTeam2(String team2) {
         this.team2 = team2;
-    }
-
-    public float getSpread() {
-        return spread;
-    }
-
-    public void setSpread(float spread) {
-        this.spread = spread;
     }
 
     public ZonedDateTime getStartTime() {
@@ -82,11 +70,27 @@ public class Game extends BaseEntity {
         this.team2Score = team2Score;
     }
 
-    public PoolType getPoolType() {
-        return poolType;
+    public GameType getPoolType() {
+        return gameType;
     }
 
-    public void setPoolType(PoolType poolType) {
-        this.poolType = poolType;
+    public void setPoolType(GameType gameType) {
+        this.gameType = gameType;
+    }
+
+    public GameGroup getGameGroup() {
+        return gameGroup;
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(GameType gameType) {
+        this.gameType = gameType;
+    }
+
+    public void setGameGroup(GameGroup gameGroup) {
+        this.gameGroup = gameGroup;
     }
 }

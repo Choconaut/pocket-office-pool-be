@@ -1,6 +1,7 @@
-package com.example.pocketofficepool.pooltype;
+package com.example.pocketofficepool.gametype;
 
 import com.example.pocketofficepool.BaseEntity;
+import com.example.pocketofficepool.game.Game;
 import com.example.pocketofficepool.pool.Pool;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -8,14 +9,18 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class PoolType extends BaseEntity {
+public class GameType extends BaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "poolType")
+    @OneToMany
     private List<Pool> pools;
 
-    private String apiEndpoint;
+    @OneToMany
+    private List<Game> games;
+
+    // For future use to grab data from an API
+//    private String apiEndpoint;
 
     public String getName() {
         return name;
@@ -25,19 +30,19 @@ public class PoolType extends BaseEntity {
         this.name = name;
     }
 
-    public String getApiEndpoint() {
-        return apiEndpoint;
-    }
-
-    public void setApiEndpoint(String apiEndpoint) {
-        this.apiEndpoint = apiEndpoint;
-    }
-
     public List<Pool> getPools() {
         return pools;
     }
 
     public void setPools(List<Pool> pools) {
         this.pools = pools;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }

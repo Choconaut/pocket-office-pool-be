@@ -10,6 +10,7 @@ import java.util.List;
 
 @Entity
 public class Account extends BaseEntity {
+    String name;
 
     @OneToMany(mappedBy = "account")
     private List<User> users;
@@ -30,5 +31,13 @@ public class Account extends BaseEntity {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
