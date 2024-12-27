@@ -29,7 +29,6 @@ public class GameService {
 
         game.setTeam1(update.getTeam1());
         game.setTeam2(update.getTeam2());
-        game.setSpread(update.getSpread());
         game.setStartTime(update.getStartTime());
         game.setTeam1Score(update.getTeam1Score());
         game.setTeam2Score(update.getTeam2Score());
@@ -37,9 +36,9 @@ public class GameService {
         return save(game);
     }
 
-    public Game delete(UUID id) {
+    public void delete(UUID id) {
         Game game = findById(id);
         game.setDeletedAt(ZonedDateTime.now());
-        return gameRepository.save(game);
+        gameRepository.save(game);
     }
 }

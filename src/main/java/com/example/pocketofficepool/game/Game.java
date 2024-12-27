@@ -70,14 +70,6 @@ public class Game extends BaseEntity {
         this.team2Score = team2Score;
     }
 
-    public GameType getPoolType() {
-        return gameType;
-    }
-
-    public void setPoolType(GameType gameType) {
-        this.gameType = gameType;
-    }
-
     public GameGroup getGameGroup() {
         return gameGroup;
     }

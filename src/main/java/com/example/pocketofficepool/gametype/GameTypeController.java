@@ -18,8 +18,8 @@ public class GameTypeController {
 
     private final GameTypeDtoToGameTypeConverter gameTypeDtoToGameTypeConverter;
 
-    public GameTypeController(GameTypeService poolTypeService, GameTypeToGameTypeDtoConverter gameTypeToGameTypeDtoConverter, GameTypeDtoToGameTypeConverter gameTypeDtoToGameTypeConverter) {
-        this.gameTypeService = poolTypeService;
+    public GameTypeController(GameTypeService gameTypeService, GameTypeToGameTypeDtoConverter gameTypeToGameTypeDtoConverter, GameTypeDtoToGameTypeConverter gameTypeDtoToGameTypeConverter) {
+        this.gameTypeService = gameTypeService;
         this.gameTypeToGameTypeDtoConverter = gameTypeToGameTypeDtoConverter;
         this.gameTypeDtoToGameTypeConverter = gameTypeDtoToGameTypeConverter;
     }

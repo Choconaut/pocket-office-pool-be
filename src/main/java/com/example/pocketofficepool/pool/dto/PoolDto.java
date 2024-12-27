@@ -20,6 +20,6 @@ public record PoolDto(
         ZonedDateTime closeTime,
 
         @NotEmpty(message = "Game group is required")
-        UUID poolType
+        UUID gameType
 ) {
 }

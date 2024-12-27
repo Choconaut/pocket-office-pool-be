@@ -3,6 +3,7 @@ package com.example.pocketofficepool.gametype;
 import com.example.pocketofficepool.BaseEntity;
 import com.example.pocketofficepool.game.Game;
 import com.example.pocketofficepool.pool.Pool;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -13,10 +14,10 @@ public class GameType extends BaseEntity {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "gameType")
     private List<Pool> pools;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "gameType")
     private List<Game> games;
 
     // For future use to grab data from an API

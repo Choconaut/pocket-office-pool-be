@@ -36,7 +36,7 @@ public class PoolController {
     }
 
     // Don't think there's a reason for pools to have unique names so it searches by id
-    @PostMapping("/{poolId}")
+    @GetMapping("/{poolId}")
     public Result getPool(@PathVariable UUID poolId) {
         Pool pool = this.poolService.findById(poolId);
         PoolDto poolDto = this.poolToPoolDtoConverter.convert(pool);
@@ -52,7 +52,7 @@ public class PoolController {
         return new Result(true, StatusCode.SUCCESS, "Successfully updated pool", updatedPoolDto);
     }
 
-    @PutMapping("/{poolId}")
+    @DeleteMapping("/{poolId}")
     public Result deletePool(@PathVariable UUID poolId) {
         this.poolService.delete(poolId);
         return new Result(true, StatusCode.SUCCESS, "Successfully deleted pool");

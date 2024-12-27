@@ -14,7 +14,7 @@ public class PoolToPoolDtoConverter implements Converter<Pool, PoolDto> {
                 source.getBettingType(),
                 source.getOpenTime(),
                 source.getCloseTime(),
-                source.getPoolType().getId()
+                source.getGameType().getId()
         );
     }
 }

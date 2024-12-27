@@ -14,17 +14,12 @@ import java.util.UUID;
 public class PoolService {
 
     private final PoolRepository poolRepository;
-    private final GameTypeRepository gameTypeRepository;
 
-    public PoolService(PoolRepository poolRepository, GameTypeRepository gameTypeRepository) {
+    public PoolService(PoolRepository poolRepository) {
         this.poolRepository = poolRepository;
-        this.gameTypeRepository = gameTypeRepository;
     }
 
     public Pool save(Pool pool) {
-        GameType gameType = this.gameTypeRepository.findById(pool.getPoolType().getId())
-                .orElseThrow(() -> new ObjectNotFoundException("pool type", pool.getPoolType().getId()));
-        pool.setPoolType(gameType);
         return this.poolRepository.save(pool);
     }
 

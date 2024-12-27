@@ -2,7 +2,8 @@ package com.example.pocketofficepool.account;
 
 import com.example.pocketofficepool.BaseEntity;
 import com.example.pocketofficepool.Status;
-import com.example.pocketofficepool.user.User;
+import com.example.pocketofficepool.accountuser.AccountUser;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
@@ -12,17 +13,17 @@ import java.util.List;
 public class Account extends BaseEntity {
     String name;
 
-    @OneToMany(mappedBy = "account")
-    private List<User> users;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "account")
+    private List<AccountUser> accountUsers;
 
     private Status status;
 
-    public List<User> getUsers() {
-        return users;
+    public List<AccountUser> getUsers() {
+        return accountUsers;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUsers(List<AccountUser> accountUsers) {
+        this.accountUsers = accountUsers;
     }
 
     public Status getStatus() {

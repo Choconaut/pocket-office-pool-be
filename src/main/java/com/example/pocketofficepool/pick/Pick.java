@@ -1,8 +1,8 @@
 package com.example.pocketofficepool.pick;
 
 import com.example.pocketofficepool.BaseEntity;
+import com.example.pocketofficepool.accountuser.AccountUser;
 import com.example.pocketofficepool.pool.Pool;
-import com.example.pocketofficepool.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 
@@ -10,18 +10,18 @@ import jakarta.persistence.ManyToOne;
 public class Pick extends BaseEntity {
 
     @ManyToOne
-    private User participant;
+    private AccountUser participant;
 
     @ManyToOne
     private Pool pool;
 
     private String pickedTeam;
 
-    public User getParticipant() {
+    public AccountUser getParticipant() {
         return participant;
     }
 
-    public void setParticipant(User participant) {
+    public void setParticipant(AccountUser participant) {
         this.participant = participant;
     }
 

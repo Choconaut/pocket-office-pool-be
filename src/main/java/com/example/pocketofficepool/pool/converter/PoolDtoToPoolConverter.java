@@ -23,8 +23,8 @@ public class PoolDtoToPoolConverter implements Converter<PoolDto, Pool> {
         pool.setBettingType(source.bettingType());
         pool.setOpenTime(source.openTime());
         pool.setCloseTime(source.closeTime());
-        GameType gameType = gameTypeService.findById(source.poolType());
-        pool.setPoolType(gameType);
+        GameType gameType = gameTypeService.findById(source.gameType());
+        pool.setGameType(gameType);
         return pool;
     }
 }

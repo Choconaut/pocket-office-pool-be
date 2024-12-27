@@ -3,10 +3,10 @@ package com.example.pocketofficepool.pool;
 import com.example.pocketofficepool.BaseEntity;
 import com.example.pocketofficepool.BettingType;
 import com.example.pocketofficepool.Status;
+import com.example.pocketofficepool.accountuser.AccountUser;
 import com.example.pocketofficepool.gamegroup.GameGroup;
 import com.example.pocketofficepool.pick.Pick;
 import com.example.pocketofficepool.gametype.GameType;
-import com.example.pocketofficepool.user.User;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
@@ -18,15 +18,15 @@ public class Pool extends BaseEntity {
     private String name;
 
     @ManyToOne
-    private User owner;
+    private AccountUser owner;
 
     @Enumerated(EnumType.STRING)
     private BettingType bettingType; // Straight up, spread
 
-    @OneToMany(mappedBy = "pool", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pool")
     private List<Pick> picks;
 
-    @OneToMany(mappedBy = "pool", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "pool")
     private List<GameGroup> gameGroups; // Groups of games in this pool
 
     private ZonedDateTime openTime; // When picks can be made
@@ -62,11 +62,11 @@ public class Pool extends BaseEntity {
         this.status = status;
     }
 
-    public GameType getPoolType() {
+    public GameType getGameType() {
         return gameType;
     }
 
-    public void setPoolType(GameType gameType) {
+    public void setGameType(GameType gameType) {
         this.gameType = gameType;
     }
 
@@ -78,11 +78,11 @@ public class Pool extends BaseEntity {
         this.name = name;
     }
 
-    public User getOwner() {
+    public AccountUser getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(AccountUser owner) {
         this.owner = owner;
     }
 

@@ -1,4 +1,4 @@
-package com.example.pocketofficepool.user;
+package com.example.pocketofficepool.accountuser;
 
 import com.example.pocketofficepool.BaseEntity;
 import com.example.pocketofficepool.Role;
@@ -10,7 +10,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class User extends BaseEntity {
+public class AccountUser extends BaseEntity {
 
     @ManyToOne
     private Account account;

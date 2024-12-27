@@ -18,7 +18,7 @@ public class GameGroup extends BaseEntity {
     @ManyToOne
     private Pool pool;
 
-    @OneToMany(mappedBy = "gameGroup", cascade = CascadeType.ALL)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "gameGroup")
     private List<Game> games;
 
     private ZonedDateTime startTime;
